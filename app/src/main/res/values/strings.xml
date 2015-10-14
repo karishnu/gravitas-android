@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">graVITas</string>
+    <string name="timer">graVITas Starts in ..</string>
+    <string name="action_settings">Settings</string>
+</resources>
