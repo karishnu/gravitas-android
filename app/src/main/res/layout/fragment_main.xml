@@ -4,51 +4,181 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivityFragment"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@drawable/bg">
+
+
+    <!--visibility has been made invisible(animation issues:seconds transition will ont match with the transitions)-->
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/staybackmmuimgid"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:paddingBottom="50dp"
+        android:paddingRight="72dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/staybackrruimgid"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:paddingLeft="72dp"
+        android:paddingBottom="50dp"
+        android:layout_alignRight="@+id/staybackmmuimgid" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/staybacklluimgid"
+        android:layout_alignLeft="@+id/staybackmmuimgid"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:paddingBottom="50dp"
+        android:paddingRight="220dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/staybackssuimgid"
+        android:paddingBottom="50dp"
+        android:paddingLeft="220dp"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgmmuid"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:paddingBottom="50dp"
+        android:paddingRight="72dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgmmdid"
+        android:src="@drawable/laydown"
+        android:scaleType="centerInside"
+        android:layout_alignBottom="@+id/imgmmuid"
+        android:paddingTop="40dp"
+        android:paddingRight="72dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgrruid"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:layout_alignRight="@+id/imgmmuid"
+        android:paddingLeft="72dp"
+        android:paddingBottom="50dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgrrdid"
+        android:src="@drawable/laydown"
+        android:scaleType="centerInside"
+        android:paddingTop="40dp"
+        android:paddingLeft="72dp"
+        android:layout_alignRight="@+id/imgmmdid" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imglluid"
+        android:layout_alignLeft="@+id/imgmmuid"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:paddingRight="220dp"
+        android:paddingBottom="50dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imglldid"
+        android:layout_alignRight="@+id/imgrrdid"
+        android:src="@drawable/laydown"
+        android:scaleType="centerInside"
+        android:paddingTop="40dp"
+        android:paddingRight="220dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgssuid"
+        android:src="@drawable/layup"
+        android:scaleType="centerInside"
+        android:layout_alignRight="@+id/imgrruid"
+        android:paddingLeft="220dp"
+        android:paddingBottom="50dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgssdid"
+        android:scaleType="centerInside"
+        android:src="@drawable/laydown"
+        android:paddingTop="40dp"
+        android:paddingLeft="220dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/abc_text_size_headline_material"
-        android:layout_marginTop="50sp"
-        android:text="Days: 00"
+        android:textSize="50sp"
+        android:text="00"
         android:id="@+id/tvDays"
-        />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentStart="false"
+        android:singleLine="true"
+        android:paddingRight="220dp"
+        android:paddingBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/abc_text_size_headline_material"
-        android:text="Hours: 00"
-        android:layout_marginTop="100sp"
+        android:textSize="50sp"
+        android:text="00"
         android:id="@+id/tvHours"
-         />
-
-    <TextView  android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvTimer"
-        android:text="@string/timer"
-        android:textSize="@dimen/abc_text_size_headline_material"/>
-
+        android:layout_centerInParent="true"
+        android:paddingBottom="5dp"
+        android:paddingRight="72dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Minutes: 00"
-        android:layout_marginTop="150sp"
-        android:textSize="@dimen/abc_text_size_headline_material"
-        android:id="@+id/tvMinutes"/>
+        android:text="00"
+        android:textSize="50sp"
+        android:id="@+id/tvMinutes"
+        android:layout_alignParentTop="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_centerInParent="true"
+        android:paddingLeft="72dp"
+        android:paddingBottom="5dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/abc_text_size_headline_material"
-        android:text="Seconds: 00"
-        android:layout_marginTop="200sp"
-        android:id="@+id/tvSeconds" />
+        android:textSize="50sp"
+        android:text="00"
+        android:id="@+id/tvSeconds"
+        android:layout_alignParentTop="true"
+        android:visibility="visible"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingLeft="220dp"
+        android:paddingBottom="5dp" />
 
 </RelativeLayout>
