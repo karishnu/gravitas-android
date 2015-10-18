@@ -71,7 +71,7 @@ public class MainActivityFragment extends Fragment {
                 else animcompdd=false;
                 if(animcompdd)
                 {
-                    //ToDO thread to wait for 160 mseconds before bringing days to front.
+                    //ToDO thread to wait for 160 milliseconds before bringing days to front.
                     days.bringToFront();
                 }
                 //^^
@@ -93,7 +93,7 @@ public class MainActivityFragment extends Fragment {
                         else animcomphh = false;
                         if(animcomphh)
                         {
-                            //ToDO thread to wait for 160 mseconds before bringing hours to front.
+                            //ToDO thread to wait for 160 milliseconds before bringing hours to front.
                             hours.bringToFront();
                         }
                         //^^
@@ -114,7 +114,7 @@ public class MainActivityFragment extends Fragment {
                                 else animcompmm = false;
                                 if(animcompmm)
                                 {
-                                    //ToDO thread to wait for 160 mseconds before bringing minutes to front.
+                                    //ToDO thread to wait for 160 milliseconds before bringing minutes to front.
                                     minutes.bringToFront();
                                 }
                                 //^^
@@ -135,7 +135,7 @@ public class MainActivityFragment extends Fragment {
                                         else animcompss = false;
                                         if(animcompss)
                                         {
-                                            //ToDO thread to wait for 160 mseconds before bringing seconds to front.
+                                            //ToDO thread to wait for 160 milliseconds before bringing seconds to front.
                                             seconds.bringToFront();
                                         }
                                         //^^
