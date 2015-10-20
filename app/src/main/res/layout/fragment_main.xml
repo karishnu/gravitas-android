@@ -17,7 +17,7 @@
         android:id="@+id/staybackmmuimgid"
         android:src="@drawable/layup"
         android:scaleType="centerInside"
-        android:paddingBottom="50dp"
+        android:paddingBottom="42dp"
         android:paddingRight="72dp" />
 
     <ImageView
@@ -27,7 +27,7 @@
         android:src="@drawable/layup"
         android:scaleType="centerInside"
         android:paddingLeft="72dp"
-        android:paddingBottom="50dp"
+        android:paddingBottom="42dp"
         android:layout_alignRight="@+id/staybackmmuimgid" />
 
     <ImageView
@@ -37,14 +37,14 @@
         android:layout_alignLeft="@+id/staybackmmuimgid"
         android:src="@drawable/layup"
         android:scaleType="centerInside"
-        android:paddingBottom="50dp"
+        android:paddingBottom="42dp"
         android:paddingRight="220dp" />
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/staybackssuimgid"
-        android:paddingBottom="50dp"
+        android:paddingBottom="42dp"
         android:paddingLeft="220dp"
         android:src="@drawable/layup"
         android:scaleType="centerInside" />
@@ -57,7 +57,7 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/layup"
         android:scaleType="centerInside"
-        android:paddingBottom="50dp"
+        android:paddingBottom="42dp"
         android:paddingRight="72dp" />
 
     <ImageView
@@ -78,7 +78,7 @@
         android:scaleType="centerInside"
         android:layout_alignRight="@+id/imgmmuid"
         android:paddingLeft="72dp"
-        android:paddingBottom="50dp" />
+        android:paddingBottom="42dp" />
 
     <ImageView
         android:layout_width="fill_parent"
@@ -98,7 +98,7 @@
         android:src="@drawable/layup"
         android:scaleType="centerInside"
         android:paddingRight="220dp"
-        android:paddingBottom="50dp" />
+        android:paddingBottom="42dp" />
 
     <ImageView
         android:layout_width="fill_parent"
@@ -118,7 +118,7 @@
         android:scaleType="centerInside"
         android:layout_alignRight="@+id/imgrruid"
         android:paddingLeft="220dp"
-        android:paddingBottom="50dp" />
+        android:paddingBottom="42dp" />
 
     <ImageView
         android:layout_width="fill_parent"
@@ -178,6 +178,15 @@
         android:layout_alignParentTop="true"
         android:visibility="visible"
         android:gravity="center_vertical|center_horizontal"
+        android:paddingLeft="220dp"
+        android:paddingBottom="5dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/elembet"
+        android:scaleType="centerInside"
         android:paddingLeft="220dp"
         android:paddingBottom="5dp" />
 

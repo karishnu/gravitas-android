@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 
+import java.util.logging.Handler;
 
 import maps.gaurav.com.gravitas.R;
 
@@ -22,7 +23,7 @@ import maps.gaurav.com.gravitas.R;
  */
 public class MainActivityFragment extends Fragment {
 
-    TextView seconds, minutes, hours, days;
+    TextView seconds, minutes, hours, days, t;
     ImageView rruelem,mmuelem,lluelem,ssuelem;
     Boolean animcompdd,animcomphh,animcompmm,animcompss;
 
@@ -53,6 +54,8 @@ public class MainActivityFragment extends Fragment {
         final ImageView uppanels = (ImageView) view.findViewById(R.id.imgssuid);
         final Animation uppaneldowns = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
         //^^
+
+
         new CountDownTimer(6000*60*60*24,1000*60*60*24){
             @Override
             public void onTick(long millisUntilFinished) {
@@ -71,8 +74,7 @@ public class MainActivityFragment extends Fragment {
                 else animcompdd=false;
                 if(animcompdd)
                 {
-                    //ToDO thread to wait for 160 milliseconds before bringing days to front.
-                    days.bringToFront();
+                    startanimdd();
                 }
                 //^^
                 new CountDownTimer(24000*60*60,1000*60*60){
@@ -93,8 +95,7 @@ public class MainActivityFragment extends Fragment {
                         else animcomphh = false;
                         if(animcomphh)
                         {
-                            //ToDO thread to wait for 160 milliseconds before bringing hours to front.
-                            hours.bringToFront();
+                            startanimhh();
                         }
                         //^^
                         new CountDownTimer(60000*60,1000*60){
@@ -114,8 +115,7 @@ public class MainActivityFragment extends Fragment {
                                 else animcompmm = false;
                                 if(animcompmm)
                                 {
-                                    //ToDO thread to wait for 160 milliseconds before bringing minutes to front.
-                                    minutes.bringToFront();
+                                    startanimmm();
                                 }
                                 //^^
                                 new CountDownTimer(60000,1000){
@@ -128,15 +128,25 @@ public class MainActivityFragment extends Fragment {
                                         //>>ADDED FOR TRANSITION/ANIMATION
                                         if(seconds.getText()!=""+formatsecs)
                                         {
-                                            ssuelem.bringToFront();
+
                                             uppanels.startAnimation(uppaneldowns);
+                                            try{
+                                                Thread.sleep(40);
+                                                getActivity().runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        ssuelem.bringToFront();
+                                                    }
+                                                });
+                                            }catch (InterruptedException e){e.printStackTrace();}
+
+
                                             animcompss = true;
                                         }
                                         else animcompss = false;
                                         if(animcompss)
                                         {
-                                            //ToDO thread to wait for 160 milliseconds before bringing seconds to front.
-                                            seconds.bringToFront();
+                                            startanimss();
                                         }
                                         //^^
                                     }
@@ -166,7 +176,110 @@ public class MainActivityFragment extends Fragment {
                 days.setText("00");
             }
         }.start();
-
         return view;
+    }
+
+
+    //ToDO create a new value with 160 to maintain consistency between the animation(inside clock_transition.xml) and 160ms used below
+    //ToDO create a generic method that receives the parameter of what to change(look below)
+    /*public void startanim()
+    {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(160);
+                    //remember: runOnUiThread can be accessed through Activity only.
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            t.bringToFront();
+                        }
+                    });
+                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
+                }catch (InterruptedException e){e.printStackTrace();}
+            }
+        };Thread waitthenbringfront = new Thread(r);
+        waitthenbringfront.start();
+    }*/
+    public void startanimss()
+    {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(150);
+                    //remember: runOnUiThread can be accessed through Activity only.
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            seconds.bringToFront();
+                        }
+                    });
+                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
+                }catch (InterruptedException e){e.printStackTrace();}
+            }
+        };Thread waitthenbringfront = new Thread(r);
+        waitthenbringfront.start();
+    }
+    public void startanimmm()
+    {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(150);
+                    //remember: runOnUiThread can be accessed through Activity only.
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            minutes.bringToFront();
+                        }
+                    });
+                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
+                }catch (InterruptedException e){e.printStackTrace();}
+            }
+        };Thread waitthenbringfront = new Thread(r);
+        waitthenbringfront.start();
+    }
+    public void startanimhh()
+    {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(150);
+                    //remember: runOnUiThread can be accessed through Activity only.
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            hours.bringToFront();
+                        }
+                    });
+                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
+                }catch (InterruptedException e){e.printStackTrace();}
+            }
+        };Thread waitthenbringfront = new Thread(r);
+        waitthenbringfront.start();
+    }
+    public void startanimdd()
+    {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(150);
+                    //remember: runOnUiThread can be accessed through Activity only.
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            days.bringToFront();
+                        }
+                    });
+                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
+                }catch (InterruptedException e){e.printStackTrace();}
+            }
+        };Thread waitthenbringfront = new Thread(r);
+        waitthenbringfront.start();
     }
 }
