@@ -1,5 +1,63 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
-    android:name="maps.gaurav.com.gravitas.fragments.MainActivityFragment"
-    tools:layout="@layout/fragment_main" android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+        <RelativeLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+         <android.support.v7.widget.Toolbar
+            xmlns:cir="http://schemas.android.com/apk/res-auto"
+            cir:layout_behavior="maps.gaurav.com.gravitas.circletimer.toolbarAnimation"
+            android:id="@+id/toolbarLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            android:minHeight="?attr/actionBarSize">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:src="@mipmap/ic_gravitas16" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbarLogin">
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
+                    android:name="maps.gaurav.com.gravitas.fragments.MainActivityFragment"
+                    tools:layout="@layout/fragment_main" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
+

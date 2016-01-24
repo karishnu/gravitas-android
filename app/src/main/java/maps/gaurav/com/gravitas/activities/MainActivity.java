@@ -1,23 +1,32 @@
 package maps.gaurav.com.gravitas.activities;
 
-import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 
 import maps.gaurav.com.gravitas.R;
 
 
 public class MainActivity extends AppCompatActivity{
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initialiseToolbar();
     }
-
+/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,4 +49,55 @@ public class MainActivity extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
+*/
+    private void initialiseToolbar() {
+
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarLogin);
+        setSupportActionBar(toolbar);
+
+        toolbar.setContentInsetsAbsolute(0, 0);
+        toolbar.requestLayout();
+
+        gravitasToolbar(toolbar);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void gravitasToolbar(final View view) {
+        Rect rect = new Rect();
+        view.getGlobalVisibleRect(rect);
+
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+
+        display.getSize(size);
+        int height = size.y;
+
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+
+        final int initialHeight = 0;
+        final int targetHeight = height/3;
+
+        Animation animation = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if (interpolatedTime == 1.0f) {
+                    view.getLayoutParams().height = targetHeight;
+                } else {
+                    view.getLayoutParams().height =  (int) ( targetHeight * interpolatedTime);
+                    view.requestLayout();
+                }
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        animation.setDuration(Math.abs((int) ((targetHeight - initialHeight) / view.getContext().getResources().getDisplayMetrics().density)));
+        view.startAnimation(animation);
+    }
+
 }

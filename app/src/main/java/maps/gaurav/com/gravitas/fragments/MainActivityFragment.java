@@ -1,22 +1,21 @@
 package maps.gaurav.com.gravitas.fragments;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-//>>added for transition/animation
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-
-
-import java.util.logging.Handler;
+import android.widget.TextView;
 
 import maps.gaurav.com.gravitas.R;
+import maps.gaurav.com.gravitas.circletimer.Circle;
+import maps.gaurav.com.gravitas.circletimer.CircleTimeAnimation;
+
+//>>added for transition/animation
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,23 +25,26 @@ public class MainActivityFragment extends Fragment {
     TextView seconds, minutes, hours, days, t;
     ImageView rruelem,mmuelem,lluelem,ssuelem;
     Boolean animcompdd,animcomphh,animcompmm,animcompss;
-
+    Circle circle;
     public MainActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         seconds = (TextView)view.findViewById(R.id.tvSeconds);
         minutes = (TextView)view.findViewById(R.id.tvMinutes);
         hours=(TextView)view.findViewById(R.id.tvHours);
         days=(TextView)view.findViewById(R.id.tvDays);
+
         //REFERRALS TO THE IMAGEVIEWS::UPPER ELEMENTS(to implement bringtofront method)
         rruelem = (ImageView)view.findViewById(R.id.imgrruid);
         mmuelem = (ImageView)view.findViewById(R.id.imgmmuid);
         lluelem = (ImageView)view.findViewById(R.id.imglluid);
         ssuelem = (ImageView)view.findViewById(R.id.imgssuid);
+
         //^^
         //>>ADDED FOR TRANSITION/ANIMATION
         final ImageView uppanelr = (ImageView) view.findViewById(R.id.imgrruid);
@@ -54,6 +56,11 @@ public class MainActivityFragment extends Fragment {
         final ImageView uppanels = (ImageView) view.findViewById(R.id.imgssuid);
         final Animation uppaneldowns = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
         //^^
+
+        //for seconds timer
+        circle = (Circle) view.findViewById(R.id.circle);
+        secondsTimer(view);
+
 
 
         new CountDownTimer(6000*60*60*24,1000*60*60*24){
@@ -177,6 +184,17 @@ public class MainActivityFragment extends Fragment {
             }
         }.start();
         return view;
+    }
+
+
+
+
+    private void secondsTimer(View view) {
+
+        CircleTimeAnimation animation = new CircleTimeAnimation(circle, 360);
+        animation.setDuration(60000);
+        animation.setRepeatCount(Animation.INFINITE);
+        circle.startAnimation(animation);
     }
 
 
