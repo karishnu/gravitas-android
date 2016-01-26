@@ -1,5 +1,6 @@
 package maps.gaurav.com.gravitas.fragments;
 
+import android.app.Activity;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -16,7 +17,10 @@ import android.widget.ImageView;
 
 import java.util.logging.Handler;
 
+import maps.gaurav.com.gravitas.Circle;
+import maps.gaurav.com.gravitas.CircleAngleAnimation;
 import maps.gaurav.com.gravitas.R;
+import maps.gaurav.com.gravitas.activities.MainActivity;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,6 +30,7 @@ public class MainActivityFragment extends Fragment {
     TextView seconds, minutes, hours, days, t;
     ImageView rruelem,mmuelem,lluelem,ssuelem;
     Boolean animcompdd,animcomphh,animcompmm,animcompss;
+    Activity mact = new Activity();
 
     public MainActivityFragment() {
     }
@@ -55,6 +60,23 @@ public class MainActivityFragment extends Fragment {
         final Animation uppaneldowns = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
         //^^
 
+        Circle circle = (Circle) view.findViewById(R.id.circle);
+
+        int t = 0;
+
+        while(t!=60000){
+            int f = (1+t*4/60000)*90;
+            CircleAngleAnimation animation = new CircleAngleAnimation(circle,f);
+            animation.setDuration(60000);
+            circle.startAnimation(animation);
+            t = t+15000;
+        }
+
+        //CircleAngleAnimation animation = new CircleAngleAnimation(circle,f);
+        //animation.setDuration(60000);
+
+
+        //Naming::note.referring day with left, hours with middle, minutes with right, and seconds with SECONDS.
 
         new CountDownTimer(6000*60*60*24,1000*60*60*24){
             @Override
@@ -129,7 +151,7 @@ public class MainActivityFragment extends Fragment {
                                         if(seconds.getText()!=""+formatsecs)
                                         {
 
-                                            uppanels.startAnimation(uppaneldowns);
+                                            /*uppanels.startAnimation(uppaneldowns);
                                             try{
                                                 Thread.sleep(40);
                                                 getActivity().runOnUiThread(new Runnable() {
@@ -141,6 +163,9 @@ public class MainActivityFragment extends Fragment {
                                             }catch (InterruptedException e){e.printStackTrace();}
 
 
+                                            animcompss = true;*/
+                                            ssuelem.bringToFront();
+                                            uppanels.startAnimation(uppaneldowns);
                                             animcompss = true;
                                         }
                                         else animcompss = false;
@@ -210,7 +235,7 @@ public class MainActivityFragment extends Fragment {
                 try{
                     Thread.sleep(150);
                     //remember: runOnUiThread can be accessed through Activity only.
-                    getActivity().runOnUiThread(new Runnable() {
+                    mact.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             seconds.bringToFront();
@@ -230,7 +255,7 @@ public class MainActivityFragment extends Fragment {
                 try{
                     Thread.sleep(150);
                     //remember: runOnUiThread can be accessed through Activity only.
-                    getActivity().runOnUiThread(new Runnable() {
+                    mact.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             minutes.bringToFront();
@@ -250,7 +275,7 @@ public class MainActivityFragment extends Fragment {
                 try{
                     Thread.sleep(150);
                     //remember: runOnUiThread can be accessed through Activity only.
-                    getActivity().runOnUiThread(new Runnable() {
+                    mact.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             hours.bringToFront();
@@ -262,6 +287,14 @@ public class MainActivityFragment extends Fragment {
         };Thread waitthenbringfront = new Thread(r);
         waitthenbringfront.start();
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mact = activity;
+
+    }
+
     public void startanimdd()
     {
         Runnable r = new Runnable() {
@@ -270,7 +303,7 @@ public class MainActivityFragment extends Fragment {
                 try{
                     Thread.sleep(150);
                     //remember: runOnUiThread can be accessed through Activity only.
-                    getActivity().runOnUiThread(new Runnable() {
+                    mact.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             days.bringToFront();
