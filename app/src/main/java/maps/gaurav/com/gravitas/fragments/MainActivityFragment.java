@@ -1,36 +1,30 @@
 package maps.gaurav.com.gravitas.fragments;
 
-import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-//>>added for transition/animation
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-
-import java.util.logging.Handler;
-
-import maps.gaurav.com.gravitas.Circle;
-import maps.gaurav.com.gravitas.CircleAngleAnimation;
 import maps.gaurav.com.gravitas.R;
-import maps.gaurav.com.gravitas.activities.MainActivity;
+import maps.gaurav.com.gravitas.circletimer.Circle;
+import maps.gaurav.com.gravitas.circletimer.CircleTimeAnimation;
+
+//>>added for transition/animation
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
 
-    TextView seconds, minutes, hours, days, t;
-    ImageView rruelem,mmuelem,lluelem,ssuelem;
-    Boolean animcompdd,animcomphh,animcompmm,animcompss;
-    Activity mact = new Activity();
+    Circle circle;
 
     public MainActivityFragment() {
     }
@@ -38,281 +32,179 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        seconds = (TextView)view.findViewById(R.id.tvSeconds);
-        minutes = (TextView)view.findViewById(R.id.tvMinutes);
-        hours=(TextView)view.findViewById(R.id.tvHours);
-        days=(TextView)view.findViewById(R.id.tvDays);
-        //REFERRALS TO THE IMAGEVIEWS::UPPER ELEMENTS(to implement bringtofront method)
-        rruelem = (ImageView)view.findViewById(R.id.imgrruid);
-        mmuelem = (ImageView)view.findViewById(R.id.imgmmuid);
-        lluelem = (ImageView)view.findViewById(R.id.imglluid);
-        ssuelem = (ImageView)view.findViewById(R.id.imgssuid);
-        //^^
-        //>>ADDED FOR TRANSITION/ANIMATION
-        final ImageView uppanelr = (ImageView) view.findViewById(R.id.imgrruid);
-        final Animation uppaneldownr = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
-        final ImageView uppanelm = (ImageView) view.findViewById(R.id.imgmmuid);
-        final Animation uppaneldownm = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
-        final ImageView uppanell = (ImageView) view.findViewById(R.id.imglluid);
-        final Animation uppaneldownl = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
-        final ImageView uppanels = (ImageView) view.findViewById(R.id.imgssuid);
-        final Animation uppaneldowns = AnimationUtils.loadAnimation(view.getContext(),R.anim.clock_transition);
-        //^^
 
-        Circle circle = (Circle) view.findViewById(R.id.circle);
-
-        int t = 0;
-
-        while(t!=60000){
-            int f = (1+t*4/60000)*90;
-            CircleAngleAnimation animation = new CircleAngleAnimation(circle,f);
-            animation.setDuration(60000);
-            circle.startAnimation(animation);
-            t = t+15000;
-        }
-
-        //CircleAngleAnimation animation = new CircleAngleAnimation(circle,f);
-        //animation.setDuration(60000);
+        final View view = inflater.inflate(R.layout.fragment_main, container, false);
+        //for seconds timer
+        circle = (Circle) view.findViewById(R.id.circle);
+        secondsTimer(view);
 
 
-        //Naming::note.referring day with left, hours with middle, minutes with right, and seconds with SECONDS.
-
-        new CountDownTimer(6000*60*60*24,1000*60*60*24){
+        new CountDownTimer(6000 * 60 * 60 * 24, 1000 * 60 * 60 * 24) {
             @Override
             public void onTick(long millisUntilFinished) {
-                millisUntilFinished/=(1000*60*60*24);
+                millisUntilFinished /= (1000 * 60 * 60 * 24);
                 //FORMATTED OUTPUT of 2 character length
-                String formatteddays = String.format("%02d", millisUntilFinished);
-                days.setText(""+formatteddays);
-                //^^
-                //>>ADDED FOR TRANSITION/ANIMATION
-                if(days.getText()!=""+formatteddays)
-                {
-                    lluelem.bringToFront();
-                    uppanell.startAnimation(uppaneldownl);
-                    animcompdd = true;
-                }
-                else animcompdd=false;
-                if(animcompdd)
-                {
-                    startanimdd();
-                }
-                //^^
-                new CountDownTimer(24000*60*60,1000*60*60){
+                final String formatteddays = String.format("%02d", millisUntilFinished);
+                int days = Integer.parseInt(formatteddays);
+                int days1 = days/10;
+                int days2 = days%10;
+                flip(view, days1, 1);
+                flip(view, days2, 2);
+                new CountDownTimer(24000 * 60 * 60, 1000 * 60 * 60) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        millisUntilFinished/=(1000*60*60);
+                        millisUntilFinished /= (1000 * 60 * 60);
                         //FORMATTED OUTPUT of 2 character length
                         String formattedhours = String.format("%02d", millisUntilFinished);
-                        hours.setText(""+formattedhours);
-                        //^^
-                        //>>ADDED FOR TRANSITION/ANIMATION
-                        if(hours.getText()!=""+formattedhours)
-                        {
-                            mmuelem.bringToFront();
-                            uppanelm.startAnimation(uppaneldownm);
-                            animcomphh = true;
-                        }
-                        else animcomphh = false;
-                        if(animcomphh)
-                        {
-                            startanimhh();
-                        }
-                        //^^
-                        new CountDownTimer(60000*60,1000*60){
+                        int hrs = Integer.parseInt(formattedhours);
+                        int hrs1 = hrs/10;
+                        int hrs2 = hrs%10;
+                        flip(view, hrs1, 3);
+                        flip(view, hrs2, 4);
+                        new CountDownTimer(60000 * 60, 1000 * 60) {
                             @Override
                             public void onTick(long millisUntilFinished) {
-                                millisUntilFinished/=(1000*60);
+                                millisUntilFinished /= (1000 * 60);
                                 //FORMATTED OUTPUT of 2 character length
                                 String formattminutes = String.format("%02d", millisUntilFinished);
-                                minutes.setText(""+formattminutes);
-                                //>>ADDED FOR TRANSITION/ANIMATION
-                                if(minutes.getText()!=""+millisUntilFinished)
-                                {
-                                    rruelem.bringToFront();
-                                    uppanelr.startAnimation(uppaneldownr);
-                                    animcompmm = true;
-                                }
-                                else animcompmm = false;
-                                if(animcompmm)
-                                {
-                                    startanimmm();
-                                }
-                                //^^
-                                new CountDownTimer(60000,1000){
+                                int mins = Integer.parseInt(formattminutes);
+                                int mins1 = mins/10;
+                                int mins2 = mins%10;
+                                flip(view, mins1,5);
+                                flip(view, mins2,6);
+                                new CountDownTimer(60000, 1000) {
                                     @Override
                                     public void onTick(long millisUntilFinished) {
-                                        millisUntilFinished/=1000;
+                                        millisUntilFinished /= 1000;
                                         //FORMATTED OUTPUT of 2 character length
                                         String formatsecs = String.format("%02d", millisUntilFinished);
-                                        seconds.setText(""+formatsecs);
-                                        //>>ADDED FOR TRANSITION/ANIMATION
-                                        if(seconds.getText()!=""+formatsecs)
-                                        {
-
-                                            /*uppanels.startAnimation(uppaneldowns);
-                                            try{
-                                                Thread.sleep(40);
-                                                getActivity().runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        ssuelem.bringToFront();
-                                                    }
-                                                });
-                                            }catch (InterruptedException e){e.printStackTrace();}
-
-
-                                            animcompss = true;*/
-                                            ssuelem.bringToFront();
-                                            uppanels.startAnimation(uppaneldowns);
-                                            animcompss = true;
-                                        }
-                                        else animcompss = false;
-                                        if(animcompss)
-                                        {
-                                            startanimss();
-                                        }
-                                        //^^
+                                        int secs = Integer.parseInt(formatsecs);
+                                        int secs1 = secs/10;
+                                        int secs2 = secs%10;
+                                        flip(view, secs1,7);
+                                        flip(view, secs2,8);
                                     }
 
                                     @Override
                                     public void onFinish() {
-                                        seconds.setText("00");
                                     }
                                 }.start();
                             }
+
                             @Override
                             public void onFinish() {
-                                minutes.setText("00");
                             }
                         }.start();
 
                     }
 
                     @Override
-                    public void onFinish() {
-                        hours.setText("00");
+                    public void onFinish(){
                     }
                 }.start();
             }
+
             @Override
             public void onFinish() {
-                days.setText("00");
             }
         }.start();
         return view;
     }
 
+    private void secondsTimer(View view) {
 
-    //ToDO create a new value with 160 to maintain consistency between the animation(inside clock_transition.xml) and 160ms used below
-    //ToDO create a generic method that receives the parameter of what to change(look below)
-    /*public void startanim()
-    {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    Thread.sleep(160);
-                    //remember: runOnUiThread can be accessed through Activity only.
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            t.bringToFront();
-                        }
-                    });
-                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
-                }catch (InterruptedException e){e.printStackTrace();}
-            }
-        };Thread waitthenbringfront = new Thread(r);
-        waitthenbringfront.start();
-    }*/
-    public void startanimss()
-    {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    Thread.sleep(150);
-                    //remember: runOnUiThread can be accessed through Activity only.
-                    mact.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            seconds.bringToFront();
-                        }
-                    });
-                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
-                }catch (InterruptedException e){e.printStackTrace();}
-            }
-        };Thread waitthenbringfront = new Thread(r);
-        waitthenbringfront.start();
-    }
-    public void startanimmm()
-    {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    Thread.sleep(150);
-                    //remember: runOnUiThread can be accessed through Activity only.
-                    mact.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            minutes.bringToFront();
-                        }
-                    });
-                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
-                }catch (InterruptedException e){e.printStackTrace();}
-            }
-        };Thread waitthenbringfront = new Thread(r);
-        waitthenbringfront.start();
-    }
-    public void startanimhh()
-    {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    Thread.sleep(150);
-                    //remember: runOnUiThread can be accessed through Activity only.
-                    mact.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            hours.bringToFront();
-                        }
-                    });
-                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
-                }catch (InterruptedException e){e.printStackTrace();}
-            }
-        };Thread waitthenbringfront = new Thread(r);
-        waitthenbringfront.start();
+        CircleTimeAnimation animation = new CircleTimeAnimation(circle, 360);
+        animation.setDuration(60000);
+        animation.setRepeatCount(Animation.INFINITE);
+        circle.startAnimation(animation);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mact = activity;
+    public void flip(final View v, int changeNumber, final int ithclock) {
+        //int upperBackId = R.id.up_back;
+        String compUpperBackID = "up_back" + ithclock;
+        int upperBackId = getResources().getIdentifier(compUpperBackID,"id",getContext().getPackageName());
+        final ImageView up_back = (ImageView) v.findViewById(upperBackId);
+        Drawable img = up_back.getDrawable();
 
-    }
+        String compUpperID = "up" + ithclock;
+        int upperId = getResources().getIdentifier(compUpperID,"id",getContext().getPackageName());
+        final ImageView up = (ImageView) v.findViewById(upperId);
+        up.setImageDrawable(img);
+        up.setVisibility(View.INVISIBLE);
 
-    public void startanimdd()
-    {
-        Runnable r = new Runnable() {
+        String compDownID = "down" + ithclock;
+        int downId = getResources().getIdentifier(compDownID,"id",getContext().getPackageName());
+        final ImageView down = (ImageView) v.findViewById(downId);
+        // down.getLayoutParams().height = 0;
+        down.setVisibility(View.INVISIBLE);
+
+        int resId = getResources().getIdentifier("up_" + changeNumber,
+                "drawable", getContext().getPackageName());
+        Drawable image = getResources().getDrawable(resId);
+        up_back.setImageDrawable(image);
+
+        resId = getResources().getIdentifier("down_" + changeNumber,
+                "drawable", getContext().getPackageName());
+        image = getResources().getDrawable(resId);
+        down.setImageDrawable(image);
+
+        Animation anim = new ScaleAnimation(1f, 1f, // Start and end values for
+                // the X axis scaling
+                1f, 0f, // Start and end values for the Y axis scaling
+                Animation.RELATIVE_TO_SELF, 0f, // Pivot point of X scaling
+                Animation.RELATIVE_TO_SELF, 1f); // Pivot point of Y scaling
+        anim.setDuration(100);
+        anim.setAnimationListener(new Animation.AnimationListener() {
+
             @Override
-            public void run() {
-                try{
-                    Thread.sleep(150);
-                    //remember: runOnUiThread can be accessed through Activity only.
-                    mact.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            days.bringToFront();
-                        }
-                    });
-                    //Need to change the Interface element seconds, hence the following method(runOnUiThread)
-                }catch (InterruptedException e){e.printStackTrace();}
+            public void onAnimationStart(Animation animation) {
+                // TODO Auto-generated method stub
+
             }
-        };Thread waitthenbringfront = new Thread(r);
-        waitthenbringfront.start();
-    }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Animation anim = new ScaleAnimation(1f, 1f, 0f, 1f,
+                        Animation.RELATIVE_TO_SELF, 0f,
+                        Animation.RELATIVE_TO_SELF, 0f);
+
+                anim.setDuration(200);
+                anim.setAnimationListener(new Animation.AnimationListener() {
+
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        String compDownBackID = "down_back" + ithclock;
+                        int downbackId = getResources().getIdentifier(compDownBackID,"id",getContext().getPackageName());
+                        final ImageView back_down = (ImageView) v.findViewById(downbackId);
+
+                        //ImageView back_down = (ImageView) getView().findViewById(R.id.down_back);
+                        back_down.setImageDrawable(down.getDrawable());
+                    }
+                });
+                down.startAnimation(anim);
+
+            }
+        });
+        up.startAnimation(anim);
+
+    }// end flip
+
 }

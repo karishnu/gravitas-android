@@ -2,4 +2,9 @@
     <string name="app_name">graVITas</string>
     <string name="timer">graVITas Starts in ..</string>
     <string name="action_settings">Settings</string>
+    <string name="openDrawer">GravitasO</string>
+    <string name="closeDrawer">Gravitas</string>
+    <string name="drawer_elem1">elem1</string>
+    <string name="drawer_elem2">elem2</string>
+    <string name="drawer_elem3">elem3</string>
 </resources>

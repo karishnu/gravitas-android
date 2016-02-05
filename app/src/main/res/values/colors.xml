@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f4d56</color>
+    <color name="colorPrimaryDark">#39464f</color>
+    <color name="appBackground">#ebebeb</color>
+    <color name="timerBackground">#85a2b5</color>
+    <color name="timer">#3f4d56</color>
+    <color name="drawerPrimaryColor">#2196F3</color>
+    <color name="drawerPrimaryDarkColor">#1976D2</color>
+</resources>
