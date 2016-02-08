@@ -1,11 +1,17 @@
 package maps.gaurav.com.gravitas.activities;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,13 +20,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import android.os.Handler;
+import java.util.zip.Inflater;
 
 import maps.gaurav.com.gravitas.R;
+import maps.gaurav.com.gravitas.fragments.MainActivityFragment;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -43,12 +57,13 @@ public class MainActivity extends AppCompatActivity{
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                if(menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
+            public boolean onNavigationItemSelected(final MenuItem menuItem) {
+                menuItem.setChecked(true);
                 drawerLayout.closeDrawers();
-                switch(menuItem.getItemId()){
-                    //TODO Activity Selections
+                switch (menuItem.getItemId()) {
+                    case R.id.drawer_events:
+                    case R.id.drawer_home:
+                    case R.id.drawer_wish_list:
                 }
                 return true;
             }

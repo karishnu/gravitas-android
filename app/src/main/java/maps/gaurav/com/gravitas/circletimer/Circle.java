@@ -60,7 +60,8 @@ public class Circle extends View {
         color2 = r.getColor(R.color.timer);
 
         //rect = new RectF(left , top,  right, bottom);
-        rect = new RectF(50, ((height*2)/3)-x-630, width-50 ,((height*2)/3)+x-685);
+        //rect = new RectF(50, ((height*2)/3)-x-630, width-50 ,((height*2)/3)+x-685);
+        rect = new RectF(25,(height/3)-width/2,width-25,(height/3)+width/2-50);
 
         //Initial Angle
         angle = 0;

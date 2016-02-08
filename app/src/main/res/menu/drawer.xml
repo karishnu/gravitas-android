@@ -4,19 +4,19 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/inbox"
+            android:id="@+id/drawer_home"
             android:checked="false"
             android:icon="@drawable/placeholder"
             android:title="@string/drawer_home" />
 
         <item
-            android:id="@+id/starred"
+            android:id="@+id/drawer_events"
             android:checked="false"
             android:icon="@drawable/placeholder"
             android:title="@string/drawer_events" />
 
         <item
-            android:id="@+id/sent_mail"
+            android:id="@+id/drawer_wish_list"
             android:checked="false"
             android:icon="@drawable/placeholder"
             android:title="@string/drawer_wish_list" />

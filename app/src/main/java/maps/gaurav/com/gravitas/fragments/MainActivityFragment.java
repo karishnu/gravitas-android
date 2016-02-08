@@ -119,8 +119,11 @@ public class MainActivityFragment extends Fragment {
         circle.startAnimation(animation);
     }
 
-    public void flip(final View v, int changeNumber, final int ithclock) {
+    public int flip(final View v, int changeNumber, final int ithclock) {
         //int upperBackId = R.id.up_back;
+        if(!isAdded()){
+            return 0;
+        }
         String compUpperBackID = "up_back" + ithclock;
         int upperBackId = getResources().getIdentifier(compUpperBackID,"id",getContext().getPackageName());
         final ImageView up_back = (ImageView) v.findViewById(upperBackId);
@@ -204,7 +207,10 @@ public class MainActivityFragment extends Fragment {
             }
         });
         up.startAnimation(anim);
+        return 1;
 
     }// end flip
+
+
 
 }
