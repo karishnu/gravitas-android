@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,9 +31,6 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +41,11 @@ public class MainActivity extends AppCompatActivity{
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            public boolean onNavigationItemSelected(final MenuItem menuItem) {
                 if(menuItem.isChecked()) menuItem.setChecked(false);
                 else menuItem.setChecked(true);
                 drawerLayout.closeDrawers();
-                switch(menuItem.getItemId()){
-                    //TODO Activity Selections
-                }
+                openFragment(menuItem.getItemId());
                 return true;
             }
         });
@@ -105,6 +101,9 @@ public class MainActivity extends AppCompatActivity{
         gravitasToolbar(toolbar);
     }
 
+    private void openFragment(int id){
+
+    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void gravitasToolbar(final View view) {
